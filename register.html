@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title> Tutoring Registration </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<style>
+			.img-container 
+			{
+				text-align: center;
+			}
+			h1
+			{
+				color: orange;
+			}
+			table, th, td 
+			{
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th, td 
+			{
+				padding: 15px;
+			}
+			td
+			{
+				height: 50px;
+			}
+			#submit-button
+			{
+				width: 100px;
+				height: 25px;
+			}
+			#day
+			{
+				width: 100px;
+			}
+			label
+			{
+				color: red;
+			}
+			#schedule
+			{
+				color : red;
+			}
+			
+    </style>
+		
+	</head>
+
+	<body>
+		<div class="img-container">
+			<img src="Peer-Tutor.jpg" alt="Tutoring Registration">
+		</div>
+		
+		<h1> Sign Up </h1>
+		
+		<form method="POST" name="Form" onsubmit="return validateForm()" action="http://localhost:81/display.php">
+		
+			<label for="firstname"><B>* First name :</B></label>
+		
+			<input id="firstname" type="text" name="firstname" placeholder="Enter your first name">
+
+			<label for="lastname"><B>* Last name :</B></label>
+		
+			<input id="lastname" type="text" name="lastname" placeholder="Enter your last name"><br><br>
+			
+			<label for="email"><B>* Email address :</B></label>
+			
+			<input id="email" type="text" name="email" placeholder="Enter your email address"><br><br>
+			<label for="subject"><B>* Subject :</B></label>
+		
+			<input id="subject" type="button" value="add subject" onclick="addSubject();"/>
+			<input id="subject" type="button" value="remove subject" onclick="removeSubject();"/>
+			<p>New subject box goes here:</p>
+			<div id="newElementId"></div>
+		
+			<p><B id = "schedule">* Availabilities :</B> Note that in each box, you must enter your time from 0:00 to 23:59. </p><br><br>
+			
+			<table>
+				<thead>
+					<tr>
+						<th style="width: 180px"></th>
+						<th style="width: 180px">Sunday</th>
+						<th style="width: 180px">Monday</th>
+						<th style="width: 180px">Tuesday</th>
+						<th style="width: 180px">Wednesday</th>
+						<th style="width: 180px">Thursday</th>
+						<th style="width: 180px">Friday</th>
+						<th style="width: 180px">Saturday</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th><B>Availability Time </B></th>
+						<td>
+							<input type="button" value="add availability time" onclick="addToSunday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromSunday();"/><br><br>
+							<div id="availabilitySunday"></div>
+						</td>
+						<td>
+							<input type="button" value="add availability time" onclick="addToMonday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromMonday();"/><br><br>
+							<div id="availabilityMonday"></div>
+						</td>
+						<td>
+							<input type="button" value="add availability time" onclick="addToTuesday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromTuesday();"/><br><br>
+							<div id="availabilityTuesday"></div>
+						</td>
+						<td>
+							<input type="button" value="add availability time" onclick="addToWednesday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromWednesday();"/><br><br>
+							<div id="availabilityWednesday"></div>
+						</td>
+						<td>
+							<input type="button" value="add availability time" onclick="addToThursday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromThursday();"/><br><br>
+							<div id="availabilityThursday"></div>
+						</td>
+						<td>
+							<input type="button" value="add availability time" onclick="addToFriday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromFriday();"/><br><br>
+							<div id="availabilityFriday"></div>
+						</td>
+						<td>
+							<input type="button" value="add availability time" onclick="addToSaturday();"/><br><br>
+							<input type="button" value="remove availability time" onclick="removeFromSaturday();"/><br><br>
+							<div id="availabilitySaturday"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		
+			<br>
+			<br>
+		
+			<input type="submit" name="register" value="register">
+		</form>
+		
+		
+		<script type="text/JavaScript">
+			function validateForm()
+			{
+				var firstname = document.forms["Form"]["firstname"].value;
+				var lastname = document.forms["Form"]["lastname"].value;
+				var subjects = document.getElementsByClassName("mySubject");
+				var availabilities = document.getElementsByClassName("availability");
+				var email = document.forms["Form"]["email"].value;
+				
+				if(firstname == null || firstname == "" || /[^a-zA-Z]/.test(firstname))
+				{
+					alert("Please enter your first name using letters only!");
+					return false;
+				}
+				else if(lastname == null || lastname == "" || /[^a-zA-Z]/.test(lastname))
+				{
+					alert("Please enter your last name using letters only!");
+					return false;
+				}
+				else if(/\S+@\S+\.\S+/.test(email) == false)
+				{
+					alert("Please enter your email address in the correct format");
+					return false
+				}
+				else if(subjects.length == 0)
+				{
+					alert("Please enter all the subject(s) you would like to teach");
+					return false;
+				}
+				else
+				{
+					if(subjects.length > 0)
+					{
+						for(var index = 0; index < subjects.length; index++)
+						{
+							var subject = subjects[index];
+							if(subject.value == null || subject.value == "")
+							{
+								alert("Please enter the name of the subject(s) you would like to teach");
+								return false;
+							}
+						}
+					}
+					
+					if(availabilities.length == 0)
+					{
+						alert("Please enter all your availabilities");
+						return false;
+					}
+					
+					
+					if(availabilities.length > 0)
+					{
+						for(var index = 0; index < availabilities.length; index++)
+						{
+							var availability = availabilities[index];
+
+							if(/^([1]?[0-9]|2[0-3]):([0-5][0-9])-([1]?[0-9]|2[0-3]):([0-5][0-9])$/.test(availability.value) == false)
+							{
+								alert("Please enter your availability time(s) in the correct format.");
+								return false;
+							}
+							
+						}
+					}
+					
+					return true;
+				}
+				
+			}
+		
+			function addSubject() 
+			{
+				// First create a DIV element.
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<input type='text' class='mySubject' placeholder='Please enter subject' name ='subject[]' id='subject'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("newElementId").appendChild(txtNewInputBox);
+			}
+			
+			function removeSubject()
+			{
+				var list = document.getElementById("newElementId");
+				list.removeChild(list.lastChild);
+			}
+			
+			function addToSunday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Sunday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilitySunday").appendChild(txtNewInputBox);
+			
+			}
+			
+			function addToMonday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Monday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilityMonday").appendChild(txtNewInputBox);
+			
+			}
+			
+			function addToTuesday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Tuesday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilityTuesday").appendChild(txtNewInputBox);
+			
+			}
+			
+			function addToWednesday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Wednesday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilityWednesday").appendChild(txtNewInputBox);
+			}
+			
+			function addToThursday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Thursday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilityThursday").appendChild(txtNewInputBox);
+			
+			}
+			
+			function addToFriday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Friday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilityFriday").appendChild(txtNewInputBox);
+			
+			}
+			
+			function addToSaturday()
+			{
+				var txtNewInputBox = document.createElement('div');
+
+				// Then add the content (a new input box) of the element.
+				txtNewInputBox.innerHTML = "<br><input type='text' class='availability' placeholder='Enter session' name='Saturday[]'><br><br>";
+
+				// Finally put it where it is supposed to appear.
+				document.getElementById("availabilitySaturday").appendChild(txtNewInputBox);
+			
+			}
+			
+			function removeFromSunday()
+			{
+				var list = document.getElementById("availabilitySunday");
+				list.removeChild(list.lastChild);
+			}
+			
+			function removeFromMonday()
+			{
+				var list = document.getElementById("availabilityMonday");
+				list.removeChild(list.lastChild);
+			}
+			
+			function removeFromTuesday()
+			{
+				var list = document.getElementById("availabilityTuesday");
+				list.removeChild(list.lastChild);
+			}
+			
+			function removeFromWednesday()
+			{
+				var list = document.getElementById("availabilityWednesday");
+				list.removeChild(list.lastChild);
+			}
+			
+			function removeFromThursday()
+			{
+				var list = document.getElementById("availabilityThursday");
+				list.removeChild(list.lastChild);
+			}
+			
+			function removeFromFriday()
+			{
+				var list = document.getElementById("availabilityFriday");
+				list.removeChild(list.lastChild);
+			}
+			
+			function removeFromSaturday()
+			{
+				var list = document.getElementById("availabilitySaturday");
+				list.removeChild(list.lastChild);
+			}
+		</script>
+		
+	</body>
+</html>

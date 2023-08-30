@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tutors>
+  <tutor qanda="true" workshop="true" bookclub="true">
+    <name>Dana Unninayar</name>
+    <email>dont know</email>
+    <teaching>
+      <subject>Mathematics</subject>
+      <subject>French</subject>
+      <subject>Sciences</subject>
+      <subject>Music</subject>
+    </teaching>
+    <available>
+      <day>Saturday</day>
+      <day>Monday</day>
+    </available>
+  </tutor>
+  <tutor qanda="true" workshop="true" bookclub="true">
+    <name>Athy Ambikkumar</name>
+    <email>dont know</email>
+    <teaching>
+      <subject>Mathematics</subject>
+      <subject>Computer Science</subject>
+      <subject>Sciences</subject>
+      <subject>Writing</subject>
+    </teaching>
+    <available>
+      <day>Saturday</day>
+      <day>Sunday</day>
+    </available>
+  </tutor>
+  <tutor qanda="true" workshop="true" bookclub="true">
+    <name>Jonathan Bloch</name>
+    <email>jonathanbloch0@gmail.com</email>
+    <teaching>
+      <subject>Chemistry</subject>
+      <subject>Mathematics</subject>
+      <subject>Computer Science</subject>
+      <subject>Physics</subject>
+    </teaching>
+    <available>
+      <day>Sunday<time>9:00-10:00</time><time>12:00-13:00</time></day>
+      <day>Tuesday<time>11:00-12:30</time></day>
+      <day>Thursday<time>9:00-10:00</time></day>
+      <day>Saturday<time>11:00-12:30</time></day>
+    </available>
+  </tutor>
+  <tutor qanda="true" workshop="true" bookclub="true">
+    <name>James Ray</name>
+    <email>jamesray@gmail.com</email>
+    <teaching>
+      <subject>Mathematics</subject>
+      <subject>Computer Science</subject>
+      <subject>Physics</subject>
+      <subject>Italian</subject>
+    </teaching>
+    <available>
+      <day>Sunday<time>10:00-13:00</time></day>
+      <day>Thursday<time>12:00-14:00</time><time>18:00-20:00</time></day>
+      <day>Friday<time>19:00-21:00</time></day>
+    </available>
+  </tutor>
+  <tutor qanda="true" workshop="true" bookclub="true">
+    <name>Linden Grape</name>
+    <email>lindengrape1@gmail.com</email>
+    <teaching>
+      <subject>Matematics</subject>
+      <subject>Chemistry</subject>
+      <subject>Polish</subject>
+      <subject>French</subject>
+    </teaching>
+    <available>
+      <day>Tuesday<time>8:00-9:00</time></day>
+      <day>Wednesday<time>11:00-12:00</time><time>14:00-15:00</time></day>
+      <day>Thursday<time>17:00-18:00</time></day>
+    </available>
+  </tutor>
+</Tutors>

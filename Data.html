@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+    <title>Doceo Database</title>
+        <script type="text/javascript" language="javascript">
+    </script>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+ </head>
+<body>
+<h1>Hello World!!</h1>
+<h5>&#169; 2020 Athy Ambikkumar </h5><br/><br/>
+<p>Note: For each text field, the first letter of each word has to be capital letter</p>
+<p>Search Tutor name (eg. Dana Unninayar) for their courses and availabilities: </p> 
+<input type="text" id="name"/> 
+<button onclick="NameFunction()"> Click</button>
+<br/>
+<div id="hi"> 
+	<p>hi everyone</p>
+</div><br/>
+<p>Search subject as listed on website for list of tutors: </p>
+<input type="text" id="subject"/>
+<button onclick="SubjectFunction()"> Click</button>
+<br/>
+<p>Search day of the week for tutors available that day: </p>
+<input type="text" id="avail"/>
+<button onclick="AvailFunction()"> Click</button>
+<br/>
+<br/>
+
+<script>
+	function NameFunction()
+	{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				xmlDoc=xmlhttp.responseXML;
+
+				var table = "<table border='1px solid black;' width='40%;' style='font-size:30px;'><tr><th>Name</th><th>Courses</th><th>Availabilities</th></tr>";
+
+				var tutors=xmlDoc.getElementsByTagName("tutor");
+
+				var input = document.getElementById("name").value;
+		
+				for(tutor of tutors)
+				{
+					if(input == tutor.getElementsByTagName("name")[0].childNodes[0].nodeValue)
+					{
+						table += "<tr><td>";
+						table += tutor.getElementsByTagName("name")[0].childNodes[0].nodeValue + "</td><td>";
+				
+						var subjects = tutor.getElementsByTagName("subject");
+				
+						for(let subject of subjects)
+						{
+							table += subject.childNodes[0].nodeValue + "</br>";
+						}
+				
+						table += "</td>";
+				
+						var availabilities = tutor.getElementsByTagName("available");
+				
+						table += "<td>";
+				
+						table += availabilities[0].textContent + "</br>";
+			
+						table += "</td></tr>";
+					}
+				}
+				table += "</table>";
+		
+				document.getElementById("hi").innerHTML += table;
+			}
+		};
+			
+		xmlhttp.open("GET", "Tutors.xml",true);
+		xmlhttp.send();
+	}
+</script>
+
+<script>
+	function SubjectFunction()
+	{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var xmlDoc=xmlhttp.responseXML;
+				var tutors=xmlDoc.getElementsByTagName("tutor");
+				var input = document.getElementById("subject").value;
+				
+				document.write("<table border='1' width='15%' style='font-size:35px;'>");
+				document.write("<tr><th>Tutors</th></tr>");
+				
+				for(tutor of tutors)
+				{
+					subjects = tutor.getElementsByTagName("subject");
+										
+					for(let subject of subjects)
+					{
+						if(subject.textContent == input)
+						{
+							document.write("<tr><td>" + tutor.getElementsByTagName("name")[0].childNodes[0].nodeValue + "</td></tr>");
+						}
+					}
+				}
+				
+				document.write("</table>");
+			}
+		};
+		
+		xmlhttp.open("GET", "Tutors.xml",true);
+		xmlhttp.send();
+    }
+</script>
+	
+<script>
+	function AvailFunction()
+	{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var xmlDoc=xmlhttp.responseXML;
+				var tutors=xmlDoc.getElementsByTagName("tutor");
+				var input = document.getElementById("avail").value;
+				
+				document.write("<table border='1' width='35%' style='font-size:35px;'>");
+				document.write("<tr><th>Tutors</th></tr>");
+				
+				for(tutor of tutors)
+				{
+					days = tutor.getElementsByTagName("day");
+					console.log(days);
+										
+					for(let day of days)
+					{
+						if(day.innerHTML == input)
+						{
+							document.write("<tr><td>" + tutor.getElementsByTagName("name")[0].childNodes[0].nodeValue + "</td></tr>");
+						}
+					}
+				}
+				
+				document.write("</table>");
+			}
+		};
+		
+		xmlhttp.open("GET", "Tutors.xml",true);
+		xmlhttp.send();
+    }
+</script>
+
+<button onclick="window.location.href='https://www.learnwithdoceo.com/';"> Homepage</button>
+<br/><br/><br/>
+</body>
+</html>
+
